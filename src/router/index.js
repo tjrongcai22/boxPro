@@ -13,7 +13,8 @@ export default new Router({
     { path:'', component:Container },
     { path:'/login', component:Login },
     { path:'/container',component:Container},
-    { path:'*',redirect:'/container'}
+
+    // { path:'*',redirect:'/container'}
 
   ]
 
