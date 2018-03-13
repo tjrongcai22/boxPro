@@ -36,14 +36,13 @@
 
       //查询详情
       selectById(val){
-        console.log(val);
-//        this.$router.push({
-//          path:'/main',
-//          name:'selectById',
-//          params:{
-//            id:val
-//          }
-//        })
+//        console.log(val);
+        this.$router.push({
+          name:'selectById',
+          params:{
+            id:val
+          }
+        })
       },/*end*/
 
 

@@ -5,6 +5,7 @@ Vue.use(Router)
 
 import Login from '../base/Login.vue'
 import Container from '../base/Container.vue'
+import Tabs from '../base/Tabs.vue'
 
 
 export default new Router({
@@ -12,7 +13,12 @@ export default new Router({
   routes: [
     { path:'', component:Container },
     { path:'/login', component:Login },
-    { path:'/container',component:Container},
+    { path:'/container',
+      component:Container,
+      children:[
+        { path:'tabs' , component:Tabs, name:'selectById' }
+      ]
+    },
     { path:'*',redirect:'/container'}
 
   ]

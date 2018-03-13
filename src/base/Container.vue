@@ -10,7 +10,13 @@
 
       <section class="el-container is-vertical">
 
-        <Main></Main>
+        <main class="el-main">
+
+          <router-view>
+            <div>1111</div>
+          </router-view>
+
+        </main>
 
         <Footer></Footer>
 
@@ -24,13 +30,11 @@
 <script>
   import Header from '../components/Header.vue'
   import Aside from '../components/Aside.vue'
-  import Main from './Main.vue'
   import Footer from '../components/Footer.vue'
   export default {
     components:{
       Header,
       Aside,
-      Main,
       Footer
     }
 
