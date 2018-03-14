@@ -49,8 +49,6 @@
       //查询详情
       selectById(val){
         //添加class
-
-
         this.boxList = this.boxList.map( (item,index)=>{
           if(item.id === val){
             item.active = true;
@@ -60,6 +58,7 @@
           return item;
         } );
 
+        //跳转路由
         this.$router.push({
           name:'selectById',
           params:{

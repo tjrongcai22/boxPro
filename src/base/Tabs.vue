@@ -1,15 +1,14 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="测点监控" name="first">
-        <Tab1 :id="id"></Tab1>
+        <Tab1 :id="id" @loading-msg="changeLoad"></Tab1>
       </el-tab-pane>
       <el-tab-pane label="程序更新" name="second">
         <Tab2 :id="id"></Tab2>
       </el-tab-pane>
     </el-tabs>
   </div>
-
 
 </template>
 <script>
@@ -44,12 +43,18 @@
       return {
         activeName: 'first',
         id:'', //盒子id
+        loading:false, //动画
       }
     },
     methods: {
       handleClick(tab, event) {
         //console.log(tab, event);
+      },
+
+      changeLoad(val){
+        this.loading = val;
       }
+
     }
 
   }

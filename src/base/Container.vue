@@ -8,11 +8,11 @@
 
       <Aside></Aside>
 
-      <section class="el-container is-vertical" v-loading="loading">
+      <section class="el-container is-vertical">
 
         <main class="el-main">
 
-          <router-view @loading="changeLoading"></router-view>
+          <router-view></router-view>
 
         </main>
 
@@ -39,16 +39,10 @@
     },
     data(){
       return {
-        loading:false
+        loading:true
       }
     },
-    methods:{
-      changeLoading(val){
-        this.loading = val;
 
-      }
-
-    }
 
 
   }

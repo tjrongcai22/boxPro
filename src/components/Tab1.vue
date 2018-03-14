@@ -57,7 +57,6 @@
         </el-table-column>
       </el-table>
 
-
     </section>
   </section>
 
@@ -66,13 +65,20 @@
   export default{
     created(){
       let id = this.$route.params.id;
-      this.getInfoById(id)
+      this.getInfoById(id);
+
     },
 
     methods:{
       //获取ajax
       getInfoById(id){
-        console.log(id);
+        this.showRefDataBtn = false;
+        this.$emit('loading-msg',true)
+
+        setTimeout(()=>{
+          this.$emit('loading-msg',false)
+        },2000);
+
 
       },
 

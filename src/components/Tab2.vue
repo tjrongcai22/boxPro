@@ -2,7 +2,8 @@
   <section>
     <p>
       <el-button type="primary" plain @click.stop="getData">生成更新列表</el-button>
-      <el-button type="primary" plain >重启设备</el-button>
+      <el-button type="primary" plain :loading="ifLoading" @click.stop="initBox" >重启设备</el-button>
+
     </p>
     <section class="tab1_table">
 
@@ -78,7 +79,7 @@
     methods:{
       //获取ajax
       getInfoById(id){
-        console.log(id);
+        //console.log(id);
 
       },
 
@@ -92,6 +93,16 @@
         console.log(index)
 
 
+      },
+
+      //重启设备
+      initBox(){
+        this.ifLoading = true;
+
+        setTimeout(()=>{
+          this.ifLoading = false;
+        },2000);
+
       }
 
     },
@@ -104,7 +115,7 @@
     },
     data(){
       return {
-
+        ifLoading:false,
         tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
