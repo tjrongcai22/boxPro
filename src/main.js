@@ -8,9 +8,12 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
+import store from './vuex/index.js'
+
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

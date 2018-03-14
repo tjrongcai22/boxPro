@@ -6,20 +6,22 @@ Vue.use(Router)
 import Login from '../base/Login.vue'
 import Container from '../base/Container.vue'
 import Tabs from '../base/Tabs.vue'
+import Welcome from '../components/Welcome.vue'
 
 
 export default new Router({
 
   routes: [
-    { path:'', component:Container },
+    { path:'', component:Container ,redirect:'/container/welcome', },
     { path:'/login', component:Login },
     { path:'/container',
       component:Container,
       children:[
-        { path:'tabs' , component:Tabs, name:'selectById' }
+        { path:'tabs/:id', component:Tabs, name:'selectById' },
+        { path:'welcome' , component:Welcome }
       ]
     },
-    { path:'*',redirect:'/container'}
+    { path:'*',redirect:'/container/welcome'}
 
   ]
 

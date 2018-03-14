@@ -43,7 +43,7 @@
       login(){
         this.loading = true;
         setTimeout(()=>{
-          this.$router.push('/container');
+          this.$router.push('/container/welcome');
         },2000);
 
       }
