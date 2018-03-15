@@ -40,6 +40,7 @@
       //data获取vuex中的路由盒子
       this.boxList = this.GETBOXLIST;
 
+      this.NAVINDEX(this.$route.params.id);
 
     },
     computed:{

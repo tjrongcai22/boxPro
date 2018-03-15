@@ -11,7 +11,7 @@ const mutations = {
 
     state.navList = state.navList.map( (item,index)=>{
 
-      if(item.id === params){
+      if(item.id == params){
         item.active = true;
       }else{
         item.active = false;
