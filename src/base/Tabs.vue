@@ -16,14 +16,10 @@
   import Tab2 from '../components/Tab2.vue'
   import { mapGetters } from 'vuex'
   export default{
-    created(){
-      //初始化时候从vuex中获取第一台盒子id
-      this.id = this.getInitFirstId;
 
-    },
     computed:{
       ...mapGetters([
-        'getInitFirstId'
+
       ]),
 
 

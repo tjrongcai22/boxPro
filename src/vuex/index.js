@@ -3,8 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  initFirstId:'', //初始化第一台盒子id
-
+  navList:[] , //盒子
 
 }
 

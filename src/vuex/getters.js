@@ -1,9 +1,9 @@
 const getters = {
 
-  //获取初始化第一台盒子id
-  getInitFirstId(state){
-    return state.initFirstId;
-  },
+  //获取盒子路由
+  GETBOXLIST(state){
+    return state.navList;
+  }
 
 }
 

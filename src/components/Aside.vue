@@ -15,10 +15,11 @@
 </template>
 <script>
   import Search from './Search.vue'
-  import { mapActions } from 'vuex'
+  import { mapActions , mapGetters } from 'vuex'
   export default{
     created(){
-      this.boxList = [ // status 0在线和1离线
+
+      let ajax = [ // status 0在线和1离线
         {id:1,name:'2-23104-170516-00040 恒汇环腰裤1号',status:'1' , active:false},
         {id:2,name:'盒子2',status:'0' , active:false},
         {id:3,name:'盒子3',status:'1' , active:false},
@@ -33,30 +34,39 @@
 
       ]
 
-      //如果查询出来的列表不为空，获取第一台盒子id传入vuex
-      if(this.boxList.length > 0){
-        this.ADDFIRSTID(this.boxList[0].id)
-      }
+      //添加盒子路由到vuex
+      this.ADDBOXNAV(ajax);
 
+      //data获取vuex中的路由盒子
+      this.boxList = this.GETBOXLIST;
+
+
+    },
+    computed:{
+
+      ...mapGetters([
+        'GETBOXLIST'
+      ]),
+
+    },
+    watch:{
+
+      //监听路由
+      $route(){
+        //添加class,盒子的路由在vuex中，改变vuex中的active改变点击状态
+        this.NAVINDEX(this.$route.params.id);
+
+      },
 
     },
     methods:{
 
       ...mapActions([
-        'ADDFIRSTID'
+        'ADDBOXNAV','NAVINDEX'
       ]),
 
       //查询详情
       selectById(val){
-        //添加class
-        this.boxList = this.boxList.map( (item,index)=>{
-          if(item.id === val){
-            item.active = true;
-          }else{
-            item.active = false;
-          }
-          return item;
-        } );
 
         //跳转路由
         this.$router.push({
