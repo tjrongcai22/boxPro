@@ -1,7 +1,7 @@
 <template>
   <section>
     <p>
-      <el-button type="primary" plain @click.stop="getData">读取名称</el-button>
+      <el-button type="primary" plain @click.stop="getData" :loading="loads">读取名称</el-button>
       <el-button type="primary" plain v-if="showRefDataBtn" >数据刷新</el-button>
     </p>
     <section class="tab1_table">
@@ -84,8 +84,9 @@
 
       //读取名称获取ajax
       getData(){
-
+        this.loads = true;
         setTimeout(()=>{
+          this.loads = false;
           this.showRefDataBtn = true;
         },2000);
       },
@@ -108,6 +109,7 @@
     data(){
       return {
         showRefDataBtn:false, //数据刷新按钮
+        loads:false,
         tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
