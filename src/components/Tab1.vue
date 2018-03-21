@@ -58,10 +58,12 @@
       </el-table>
 
     </section>
+
   </section>
 
 </template>
 <script>
+  import {getList} from '../api/ajax.js'
   export default{
     created(){
       let id = this.$route.params.id;
@@ -70,8 +72,13 @@
     },
 
     methods:{
+
       //获取ajax
-      getInfoById(id){
+      async getInfoById(id){
+
+        const res = await getList(null)
+        console.log(res)
+
         this.showRefDataBtn = false;
         this.$emit('loading-msg',true)
 
