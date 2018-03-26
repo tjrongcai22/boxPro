@@ -63,8 +63,8 @@
 
 </template>
 <script>
-  import {getList} from '../api/ajax.js'
-  export default{
+    import {getList} from '../api/ajax.js'
+    export default{
     created(){
       let id = this.$route.params.id;
       this.getInfoById(id);
@@ -75,9 +75,9 @@
 
       //获取ajax
       async getInfoById(id){
-
-        const res = await getList(null)
-        console.log(res)
+        console.log(id)
+//        const res = await getList(null)
+//        console.log(res)
 
         this.showRefDataBtn = false;
         this.$emit('loading-msg',true)

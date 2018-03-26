@@ -92,6 +92,7 @@ export default {
       })
     })
   },
+
   //post请求
   post (url,param) {
     return new Promise((resolve,reject) => {
@@ -106,5 +107,8 @@ export default {
         resolve(res)
       })
     })
-  }
+  },
+
+
+
 }

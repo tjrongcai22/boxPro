@@ -11,7 +11,7 @@ const mutations = {
 
     state.navList = state.navList.map( (item,index)=>{
 
-      if(item.id == params){
+      if(item.plcSnnum == params){
         item.active = true;
       }else{
         item.active = false;
@@ -19,7 +19,6 @@ const mutations = {
       return item;
 
     } );
-
 
   },
 

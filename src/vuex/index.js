@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  navList:[] , //盒子
+  navList:[] , //盒子 1在线 0离线 唯一标识
 
 }
 

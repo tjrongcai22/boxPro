@@ -6,8 +6,8 @@
     </el-input>
 
     <ul class="searchBox el-dropdown-menu el-popper el-dropdown-menu--medium " :class="searchBox?'':'hide'" x-placement="bottom-end">
-      <li :key="item.id" @click="getOne(item.id,item.name)" tabindex="-1" class="el-dropdown-menu__item" v-for="(item,index) in searchList">
-        {{item.name}}
+      <li :key="item.plcSnnum" @click="getOne(item.plcSnnum,item.plcName)" tabindex="-1" class="el-dropdown-menu__item" v-for="(item,index) in searchList">
+        {{item.plcName}}
       </li>
       <div x-arrow="" class="popper__arrow" style="left: 12px;"></div>
     </ul>
@@ -16,6 +16,7 @@
 
 </template>
 <script>
+  import {searchBox} from '../api/ajax.js'
   export default{
     data(){
       return {
@@ -42,26 +43,31 @@
 
       //监控并获取搜索框的值
       getChangeVal(val){
+        setTimeout(()=>{
+          this.searchByInput(val);
+        },500);
 
+
+      },/*end*/
+
+      async searchByInput(val){
+
+        let list = await searchBox(searchVal);
+        list = list.data.obj;
         let searchVal = val;
         if(val==""){
           this.searchList = [];
           this.searchBox = false;
           return;
         }
-        //ajax
-        let list = [
-          {id:Math.random(), name:'2-23104-170516-00040 恒汇环腰裤1号'},
-          {id:Math.random(), name:'2-23104-170516-00040 恒汇环腰裤2号'},
-        ];
         if(list.length === 0){
           return false;
-
         }else{
             this.searchList = list;
             this.searchBox = true;
 
         }
+
 
 
       },/*end*/
@@ -81,7 +87,10 @@
     margin: 10px auto 0;
   }
   .searchBox{
-    top:40px;
+    top: 40px;
+    width: 303px;
+    max-height: 300px;
+    overflow-y: auto;
   }
   .el-autocomplete{
     width:100%;

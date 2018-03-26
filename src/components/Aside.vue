@@ -4,8 +4,8 @@
     <Search></Search>
     <div class="box-box">
       <ul>
-        <li :class="item.active? 'active':null" :key="item.id" v-for="(item,index) in boxList" @click.stop="selectById(item.id)">
-          <i class="el-icon-printer icon" :class="item.status==1? 'out' : 'online' " ></i> {{item.name}}
+        <li :class="item.active? 'active':null" :key="item.plcSnnum" v-for="(item,index) in boxList" @click.stop="selectById(item.plcSnnum)">
+          <i class="el-icon-printer icon" :class="item.state==1? 'online' : 'out' " ></i> {{item.plcName}}
         </li>
       </ul>
     </div>
@@ -16,31 +16,11 @@
 <script>
   import Search from './Search.vue'
   import { mapActions , mapGetters } from 'vuex'
+  import {getList} from '../api/ajax.js'
   export default{
     created(){
 
-      let ajax = [ // status 0在线和1离线
-        {id:1,name:'2-23104-170516-00040 恒汇环腰裤1号',status:'1' , active:false},
-        {id:2,name:'盒子2',status:'0' , active:false},
-        {id:3,name:'盒子3',status:'1' , active:false},
-        {id:4,name:'盒子4',status:'0', active:false},
-        {id:5,name:'盒子5',status:'0', active:false},
-        {id:Math.random(),name:'盒子6',status:'1', active:false},
-        {id:Math.random(),name:'盒子7',status:'0', active:false},
-        {id:Math.random(),name:'盒子8',status:'0', active:false},
-        {id:Math.random(),name:'盒子9',status:'1', active:false},
-        {id:Math.random(),name:'盒子10',status:'0', active:false},
-        {id:Math.random(),name:'盒子11',status:'0', active:false},
-
-      ]
-
-      //添加盒子路由到vuex
-      this.ADDBOXNAV(ajax);
-
-      //data获取vuex中的路由盒子
-      this.boxList = this.GETBOXLIST;
-
-      this.NAVINDEX(this.$route.params.id);
+      this.getInitBox();
 
     },
     computed:{
@@ -57,6 +37,7 @@
         //添加class,盒子的路由在vuex中，改变vuex中的active改变点击状态
         this.NAVINDEX(this.$route.params.id);
 
+
       },
 
     },
@@ -65,6 +46,27 @@
       ...mapActions([
         'ADDBOXNAV','NAVINDEX'
       ]),
+
+      //获取ajax
+      async getInitBox(){
+        let res = await getList(null);
+        let list = res.data.obj;
+        list = list.map( (item,index)=>{
+          item = {...item,active:false}
+          return item;
+        } );
+
+        //添加盒子路由到vuex
+        this.ADDBOXNAV(list);
+
+        //data获取vuex中的路由盒子
+        this.boxList = this.GETBOXLIST;
+
+        //路由状态
+        this.NAVINDEX(this.$route.params.id);
+
+
+      },
 
       //查询详情
       selectById(val){
