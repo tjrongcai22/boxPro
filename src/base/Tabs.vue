@@ -2,10 +2,10 @@
   <div v-loading="loading">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="测点监控" name="first">
-        <Tab1 :id="id" @loading-msg="changeLoad"></Tab1>
+        <Tab1 :plcHalfNum="plcHalfNum" :vendor="vendor" @loading-msg="changeLoad"></Tab1>
       </el-tab-pane>
       <el-tab-pane label="程序更新" name="second">
-        <Tab2 :id="id"></Tab2>
+        <Tab2 :plcHalfNum="plcHalfNum" :vendor="vendor"></Tab2>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -27,7 +27,9 @@
     watch:{
       //监听地址栏变化
       $route(){
-        this.id = this.$route.params.id;
+        let { plcHalfNum , vendor } = this.$route.query;
+        this.plcHalfNum = plcHalfNum;
+        this.vendor = vendor;
       }
 
     },
@@ -38,7 +40,8 @@
     data() {
       return {
         activeName: 'first',
-        id:'', //盒子id
+        plcHalfNum:'', //plcHalfNum
+        vendor:'', //vendor
         loading:false, //动画
       }
     },

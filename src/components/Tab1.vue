@@ -66,16 +66,20 @@
     import {getList} from '../api/ajax.js'
     export default{
     created(){
-      let id = this.$route.params.id;
-      this.getInfoById(id);
+      let { plcHalfNum,vendor } = this.$route.query;
+      let obj = {
+        plcHalfNum,
+        vendor
+      }
+      this.getInfoById(obj);
 
     },
 
     methods:{
 
       //获取ajax
-      async getInfoById(id){
-        console.log(id)
+      async getInfoById(obj){
+//        console.log(obj)
 //        const res = await getList(null)
 //        console.log(res)
 
@@ -106,10 +110,15 @@
       }
 
     },
+
+    props:[ 'plcHalfNum','vendor' ],
     watch:{
       $route(){
-        let id = this.$route.params.id;
-        this.getInfoById(id)
+        let obj = {
+          plcHalfNum:this.plcHalfNum,
+          vendor:this.vendor
+        }
+        this.getInfoById(obj);
       }
 
     },

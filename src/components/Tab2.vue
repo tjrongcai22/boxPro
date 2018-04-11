@@ -55,7 +55,7 @@
               下载
             </el-button>
             <el-button
-              @click.native.prevent="deleteRow(scope.$index, tableData4)"
+              @click.native.prevent="upload(scope.$index, tableData4)"
               type="text"
               size="small">
               上传
@@ -67,19 +67,27 @@
 
 
     </section>
+    <iframe src="" name="show"  style="width:0;height:0"></iframe>
   </section>
 
 </template>
 <script>
+  import {selectBoxByPlcHalfNum} from '../api/ajax.js'
   export default{
     created(){
-      let id = this.$route.params.id;
-      this.getInfoById(id)
+      let { plcHalfNum,vendor } = this.$route.query;
+      let obj = {
+        plcHalfNum,
+        vendor
+      }
+      this.getInfoById(obj);
     },
+    props:[ 'plcHalfNum','vendor' ],
     methods:{
       //获取ajax
-      getInfoById(id){
-        //console.log(id);
+      async getInfoById(obj){
+        let list = await selectBoxByPlcHalfNum(obj);
+        console.log(list)
 
       },
 
@@ -91,6 +99,12 @@
       //操作列表
       deleteRow(index, rows) {
         console.log(rows[index].id)
+
+
+      },
+
+      //plc上传文件
+      upload(index , rows){
 
 
       },
@@ -108,8 +122,11 @@
     },
     watch:{
       $route(){
-        let id = this.$route.params.id;
-        this.getInfoById(id)
+        let obj = {
+          plcHalfNum:this.plcHalfNum,
+          vendor:this.vendor
+        }
+        this.getInfoById(obj);
       }
 
     },

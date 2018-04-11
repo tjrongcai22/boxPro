@@ -4,10 +4,12 @@
     <Search></Search>
     <div class="box-box">
       <ul>
-        <li :class="item.active? 'active':null" :key="item.plcSnnum" v-for="(item,index) in boxList" @click.stop="selectById(item.plcSnnum)">
+        <li :class="item.active? 'active':null" :key="item.plcSnnum" v-for="(item,index) in boxList" @click.stop="selectById(item)">
           <i class="el-icon-printer icon" :class="item.state==1? 'online' : 'out' " ></i> {{item.plcName}}
         </li>
       </ul>
+      <input style="background:#fff" type="file" placeholder="盒子下载文件" @change="getFile($event)" />
+      <button @click="submitForm($event)">下载确定按钮</button>
     </div>
 
   </aside>
@@ -16,11 +18,16 @@
 <script>
   import Search from './Search.vue'
   import { mapActions , mapGetters } from 'vuex'
-  import {getList} from '../api/ajax.js'
+  import {getList,test} from '../api/ajax.js'
+  import $ from 'jquery'
   export default{
     created(){
 
       this.getInitBox();
+
+//      this.timer = setInterval(()=>{
+//        this.getInitBox();
+//      },5000)
 
     },
     computed:{
@@ -30,12 +37,15 @@
       ]),
 
     },
+    beforeDestroy(){
+      clearInterval(this.timer);
+    },
     watch:{
 
       //监听路由
       $route(){
         //添加class,盒子的路由在vuex中，改变vuex中的active改变点击状态
-        this.NAVINDEX(this.$route.params.id);
+        this.NAVINDEX(this.$route.params.plcHalfNum);
 
 
       },
@@ -46,6 +56,35 @@
       ...mapActions([
         'ADDBOXNAV','NAVINDEX'
       ]),
+
+      getFile(event){
+        this.file = event.target.files[0];
+
+      },
+
+      async submitForm(){
+
+        var formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("topic", "repository");
+        $.ajax({
+          url: "http://192.168.1.105:8083/ze/getZE",
+          type: "post",
+          contentType: false,
+          processData: false,
+          dataType: "json",
+          data: formData,
+          success: function (data) {
+            if(!data.success){
+              alert("下载错误");
+            }
+
+          }
+        });
+
+
+
+      },
 
       //获取ajax
       async getInitBox(){
@@ -63,19 +102,24 @@
         this.boxList = this.GETBOXLIST;
 
         //路由状态
-        this.NAVINDEX(this.$route.params.id);
+        this.NAVINDEX(this.$route.params.plcHalfNum);
 
 
       },
 
       //查询详情
-      selectById(val){
-
+      selectById(params){
+        let { plcHalfNum , vendor} = params;
         //跳转路由
         this.$router.push({
           name:'selectById',
           params:{
-            id:val
+            plcHalfNum
+          },
+          query:{
+            plcHalfNum,
+            vendor
+
           }
         })
       },
@@ -86,7 +130,8 @@
 
       return {
         boxList:[], //左侧列表
-
+        timer:null,
+        file:"",
       }
 
     },

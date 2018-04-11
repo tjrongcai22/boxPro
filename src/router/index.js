@@ -17,7 +17,7 @@ export default new Router({
     { path:'/container',
       component:Container,
       children:[
-        { path:'tabs/:id', component:Tabs, name:'selectById' },
+        { path:'tabs/:plcHalfNum', component:Tabs, name:'selectById' },
         { path:'welcome' , component:Welcome }
       ]
     },

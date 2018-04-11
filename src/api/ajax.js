@@ -10,3 +10,14 @@ export const searchBox = (params)=>{
   return $axios.get('/index/list',params);
 
 }
+
+//获取盒子详细信息
+export const selectBoxByPlcHalfNum = (params)=>{
+  return $axios.get('/za/getZA',params);
+
+}
+
+//测试
+export const test = ()=>{
+  return $axios.get('/ze/getZE',null)
+}
