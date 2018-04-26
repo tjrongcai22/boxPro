@@ -66,10 +66,10 @@
     import {getList} from '../api/ajax.js'
     export default{
     created(){
-      let { plcHalfNum,vendor } = this.$route.query;
+      let { halfSn,pro } = this.$route.query;
       let obj = {
-        plcHalfNum,
-        vendor
+        halfSn,
+        pro
       }
       this.getInfoById(obj);
 
@@ -111,12 +111,12 @@
 
     },
 
-    props:[ 'plcHalfNum','vendor' ],
+    props:[ 'halfSn','pro' ],
     watch:{
       $route(){
         let obj = {
-          plcHalfNum:this.plcHalfNum,
-          vendor:this.vendor
+          halfSn:this.halfSn,
+          pro:this.pro
         }
         this.getInfoById(obj);
       }

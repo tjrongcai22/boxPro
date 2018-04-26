@@ -7,6 +7,7 @@
     <div class="userInfo">
 
       <el-dropdown size="medium" trigger="click">
+
         <el-button type="primary">
           用户信息<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
@@ -29,6 +30,14 @@
       logout(){
         this.$router.push('/login');
 
+      },
+
+      //查看历史数据
+      selectHistory(){
+        this.$router.push({
+            path:'/container/historyList',
+            name:'history'
+        });
       },
 
     }

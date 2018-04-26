@@ -21,3 +21,9 @@ export const selectBoxByPlcHalfNum = (params)=>{
 export const test = ()=>{
   return $axios.get('/ze/getZE',null)
 }
+
+//获取历史数据记录
+export const getHistory = (params)=>{
+    return $axios.get('/hb/getHb',params);
+
+}

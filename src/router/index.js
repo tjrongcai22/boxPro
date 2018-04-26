@@ -17,10 +17,12 @@ export default new Router({
     { path:'/container',
       component:Container,
       children:[
-        { path:'tabs/:plcHalfNum', component:Tabs, name:'selectById' },
-        { path:'welcome' , component:Welcome }
+        { path:'tabs/:halfSn', component:Tabs, name:'selectById' },
+        { path:'welcome' , component:Welcome },
+
       ]
     },
+
     { path:'*',redirect:'/container/welcome'}
 
   ]

@@ -69,7 +69,8 @@ axios.interceptors.response.use(response => {
   return Promise.resolve(error.response)
 })
 
-axios.defaults.baseURL = 'http://192.168.1.105:8083'
+axios.defaults.baseURL = 'http://47.96.176.131:9080/service/'
+// axios.defaults.baseURL = 'http://192.168.1.105:9080/';
 //设置默认请求头
 axios.defaults.headers = {
   'X-Requested-With': 'XMLHttpRequest'
