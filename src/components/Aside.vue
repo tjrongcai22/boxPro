@@ -187,6 +187,8 @@
   .box-box{
     padding-top:20px;
     padding-bottom: 30px;
+    height: calc(100% - 119px);
+    overflow: auto;
   }
   .box-box li{
     width: 100%;

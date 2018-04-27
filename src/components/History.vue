@@ -120,7 +120,7 @@
             d = d < 10 ? ('0' + d) : d;
 
             var hours = date.getHours();
-            hours = hours < 10 ? ('0' + hours) : hours;
+            hours = hours < 10 ? (' 0' + hours) : ' '+hours;
 
             var min = date.getMinutes();
             min = min < 10 ? ('0' + min) : min;
@@ -128,7 +128,7 @@
             var seconds = date.getMinutes();
             seconds = seconds < 10 ? ('0' + seconds) : seconds;
 
-            return y + '-' + m + '-' + d + ' '+ hours+ ':' + min + ':' + seconds;
+            return y + '-' + m + '-' + d + hours+ ':' + min + ':' + seconds;
         },
 
         async getHistoryList(params){
@@ -161,20 +161,19 @@
 
   }
 </script>
-<style scope>
-.el-main{
-    /*padding-bottom:80px;*/
-}
+
+<style scope >
+
 .addMore{
     position: fixed;
     bottom: 71px;
     right: 20px;
 }
-  .el-footer{
-    display:none;
-  }
-  .keyWord{
-    display:inline-block;
-    width:150px;
-  }
+.el-footer{
+  display:none;
+}
+.keyWord{
+  display:inline-block;
+  width:150px;
+}
 </style>
